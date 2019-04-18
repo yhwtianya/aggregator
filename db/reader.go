@@ -2,10 +2,12 @@ package db
 
 import (
 	"fmt"
-	"github.com/open-falcon/aggregator/g"
 	"log"
+
+	"github.com/open-falcon/aggregator/g"
 )
 
+// 获取cluster表里符合ids的记录，内容为cluster里配置的监控信息
 func ReadClusterMonitorItems() (M map[string]*g.Cluster, err error) {
 	M = make(map[string]*g.Cluster)
 	sql := "SELECT `id`, `grp_id`, `numerator`, `denominator`, `endpoint`, `metric`, `tags`, `ds_type`, `step`, `last_update` FROM `cluster`"

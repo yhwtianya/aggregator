@@ -1,11 +1,13 @@
 package cron
 
+// 计算值
 func compute(operands []string, operators []uint8, hostname string, valMap map[string]float64) (val float64, valid bool) {
 	count := len(operands)
 	if count == 0 {
 		return val, false
 	}
 
+	// 获取所有操作项的值
 	vals := queryOperands(operands, hostname, valMap)
 	if len(vals) != count {
 		return val, false
@@ -13,6 +15,7 @@ func compute(operands []string, operators []uint8, hostname string, valMap map[s
 
 	val = vals[0]
 
+	// 执行运算符计算
 	for i := 1; i < count; i++ {
 		if operators[i-1] == '+' {
 			val += vals[i]
@@ -24,6 +27,7 @@ func compute(operands []string, operators []uint8, hostname string, valMap map[s
 	return val, true
 }
 
+// 获取所有操作项的值
 func queryOperands(counters []string, endpoint string, valMap map[string]float64) []float64 {
 	ret := []float64{}
 	for _, counter := range counters {

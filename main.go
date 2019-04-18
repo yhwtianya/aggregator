@@ -38,6 +38,7 @@ func main() {
 	go http.Start()
 	go cron.UpdateItems()
 
+	// aggregator获取其他模块的数据（比如sender、query、portal）是通过sdk库获取的，这里设置sdk里相关url的值
 	// sdk configuration
 	graph.GraphLastUrl = g.Config().Api.GraphLast
 	sender.Debug = g.Config().Debug

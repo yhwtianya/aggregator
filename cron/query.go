@@ -5,6 +5,7 @@ import (
 	"github.com/open-falcon/sdk/graph"
 )
 
+// 通过query接口查询相关指标最新监控值
 func queryCounterLast(numeratorOperands, denominatorOperands, hostnames []string, begin, end int64) (map[string]float64, error) {
 	counters := []string{}
 	for _, counter := range numeratorOperands {
@@ -25,6 +26,7 @@ func queryCounterLast(numeratorOperands, denominatorOperands, hostnames []string
 		}
 	}
 
+	// sdk通过query接口批量获取指标最新值
 	resp, err := graph.Lasts(params)
 	if err != nil {
 		return nil, err
